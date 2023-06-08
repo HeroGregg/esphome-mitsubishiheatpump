@@ -9,7 +9,8 @@
  * Author: @am-io on Github.
  * Author: @nao-pon on Github.
  * Author: Simon Knopp @sijk on Github
- * Last Updated: 2021-05-27
+ * Author: @HeroGregg on Github 
+ * Last Updated: 2023-06-08
  * License: BSD
  *
  * Requirements:
@@ -219,6 +220,7 @@ void MitsubishiHeatPump::control(const climate::ClimateCall &call) {
     }
 
     //const char* VANE_MAP[7]        = {"AUTO", "1", "2", "3", "4", "5", "SWING"};
+	//const char* WIDEVANE_MAP[7]    = {"<<", "<",  "|",  ">",  ">>", "<>", "SWING"};
     if (call.get_swing_mode().has_value()) {
         ESP_LOGV(TAG, "control - requested swing mode is %s",
                 *call.get_swing_mode());
@@ -227,10 +229,22 @@ void MitsubishiHeatPump::control(const climate::ClimateCall &call) {
         switch(*call.get_swing_mode()) {
             case climate::CLIMATE_SWING_OFF:
                 hp->setVaneSetting("AUTO");
+				hp->setWideVaneSetting("|");
                 updated = true;
                 break;
             case climate::CLIMATE_SWING_VERTICAL:
                 hp->setVaneSetting("SWING");
+				hp->setWideVaneSetting("|");
+                updated = true;
+                break;
+            case climate::CLIMATE_SWING_HORIZONTAL:
+                hp->setVaneSetting("AUTO");
+				hp->setWideVaneSetting("SWING");
+                updated = true;
+                break;
+            case climate::CLIMATE_SWING_BOTH:
+                hp->setVaneSetting("SWING");
+				hp->setWideVaneSetting("SWING");
                 updated = true;
                 break;
             default:
@@ -332,9 +346,16 @@ void MitsubishiHeatPump::hpSettingsChanged() {
 
     /* ******** HANDLE MITSUBISHI VANE CHANGES ********
      * const char* VANE_MAP[7]        = {"AUTO", "1", "2", "3", "4", "5", "SWING"};
+	 * const char* WIDEVANE_MAP[7]    = {"<<", "<",  "|",  ">",  ">>", "<>", "SWING"};
      */
-    if (strcmp(currentSettings.vane, "SWING") == 0) {
+    if (strcmp(currentSettings.vane, "SWING") == 0 && strcmp(currentSettings.wideVane, "SWING") != 0) {
         this->swing_mode = climate::CLIMATE_SWING_VERTICAL;
+    }
+	else if (strcmp(currentSettings.vane, "SWING") != 0 && strcmp(currentSettings.wideVane, "SWING") == 0) {
+        this->swing_mode = climate::CLIMATE_SWING_HORIZONTAL;
+    }
+	else if (strcmp(currentSettings.vane, "SWING") == 0 && strcmp(currentSettings.wideVane, "SWING") == 0) {
+        this->swing_mode = climate::CLIMATE_SWING_BOTH;
     }
     else {
         this->swing_mode = climate::CLIMATE_SWING_OFF;
