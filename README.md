@@ -1,3 +1,7 @@
+# HeroGregg's additions
+
+This is a fork of geoffdavis's repository, with the intention of adding support for the wide vane swing setting.
+
 # esphome-mitsubishiheatpump
 
 Wirelessly control your Mitsubishi Comfort HVAC equipment with an ESP8266 or
