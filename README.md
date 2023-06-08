@@ -66,7 +66,7 @@ Add this repository to your ESPHome config:
 
 ```yaml
 external_components:
-  - source: github://geoffdavis/esphome-mitsubishiheatpump
+  - source: github://HeroGregg/esphome-mitsubishiheatpump
 ```
 
 #### Step 3a: Upgrading from 1.x releases
@@ -219,7 +219,7 @@ sensor:
     update_interval: 60s
 
 external_components:
-  - source: github://geoffdavis/esphome-mitsubishiheatpump
+  - source: github://HeroGregg/esphome-mitsubishiheatpump
 
 climate:
   - platform: mitsubishi_heatpump
