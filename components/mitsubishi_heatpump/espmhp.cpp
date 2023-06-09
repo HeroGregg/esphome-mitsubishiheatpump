@@ -348,8 +348,8 @@ void MitsubishiHeatPump::hpSettingsChanged() {
      * const char* VANE_MAP[7]        = {"AUTO", "1", "2", "3", "4", "5", "SWING"};
 	 * const char* WIDEVANE_MAP[7]    = {"<<", "<",  "|",  ">",  ">>", "<>", "SWING"};
      */
-    ESP_LOGI(TAG, "Vane setting is: %i", currentSettings.vane);
-    ESP_LOGI(TAG, "Wide Vane setting is: %i", currentSettings.wideVane);
+    ESP_LOGI(TAG, "Vane setting is: %s", currentSettings.vane);
+    ESP_LOGI(TAG, "Wide Vane setting is: %s", currentSettings.wideVane);
     if (strcmp(currentSettings.vane, "SWING") == 0 && strcmp(currentSettings.wideVane, "SWING") != 0) {
         this->swing_mode = climate::CLIMATE_SWING_VERTICAL;
     }
