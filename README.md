@@ -1,3 +1,7 @@
+# HeroGregg's additions
+
+This is a fork of geoffdavis's repository, with the intention of adding support for the wide vane swing setting.
+
 # esphome-mitsubishiheatpump
 
 Wirelessly control your Mitsubishi Comfort HVAC equipment with an ESP8266 or
@@ -62,7 +66,7 @@ Add this repository to your ESPHome config:
 
 ```yaml
 external_components:
-  - source: github://geoffdavis/esphome-mitsubishiheatpump
+  - source: github://HeroGregg/esphome-mitsubishiheatpump
 ```
 
 #### Step 3a: Upgrading from 1.x releases
@@ -215,7 +219,7 @@ sensor:
     update_interval: 60s
 
 external_components:
-  - source: github://geoffdavis/esphome-mitsubishiheatpump
+  - source: github://HeroGregg/esphome-mitsubishiheatpump
 
 climate:
   - platform: mitsubishi_heatpump
